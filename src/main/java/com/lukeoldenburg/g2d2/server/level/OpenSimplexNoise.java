@@ -1,4 +1,4 @@
-package com.lukeoldenburg.g2d2.server;
+package com.lukeoldenburg.g2d2.server.level;
 
 /**
  * K.jpg's OpenSimplex 2, smooth variant ("SuperSimplex")
