@@ -21,4 +21,9 @@ public class Coordinate {
 		if (x + dx > 0 && x + dx < levelSize) this.x += dx;
 		if (y + dy > 0 && y + dy < levelSize) this.y += dy;
 	}
+
+	@Override
+	public String toString() {
+		return "(" + x + ", " + y + ")";
+	}
 }
