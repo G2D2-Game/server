@@ -19,8 +19,8 @@ public class JsonUtil {
 			return GSON.fromJson(data, clazz);
 
 		} catch (Exception e) {
-			LOGGER.error("Failed to load " + path, e);
-			return null;
+			LOGGER.info("Couldn't load " + path + ", creating empty object");
+			return GSON.fromJson("{}", clazz);
 		}
 	}
 
