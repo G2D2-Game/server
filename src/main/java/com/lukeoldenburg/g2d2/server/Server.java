@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.lukeoldenburg.g2d2.server.entity.Entity;
 import com.lukeoldenburg.g2d2.server.level.Level;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.io.IoBuilder;
 import org.java_websocket.server.WebSocketServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +60,7 @@ public class Server {
 	}
 
 	public static void main(String[] args) {
+		setupLogger();
 		LOGGER.info("Loading...");
 		registerHooks();
 		loadConfig();
@@ -74,6 +77,13 @@ public class Server {
 		}
 
 		webSocketServer = new ServerSocket(new InetSocketAddress(config.get("port").getAsInt()));
+	}
+
+	public static void setupLogger() {
+		PrintStream logger = IoBuilder.forLogger("System.out").setLevel(org.apache.logging.log4j.Level.INFO).buildPrintStream();
+		PrintStream errorLogger = IoBuilder.forLogger("System.err").setLevel(org.apache.logging.log4j.Level.ERROR).buildPrintStream();
+		System.setOut(logger);
+		System.setErr(errorLogger);
 	}
 
 	private static void loadConfig() {
